@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  ReelsTgAppRequestStore:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: request-store/
+      Handler: request-store
+      Runtime: go1.x
+      Architectures:
+        - x86_64
+      Tracing: Active
+      Timeout: 10
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /store
+            Method: put
